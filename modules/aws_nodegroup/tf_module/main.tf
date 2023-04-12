@@ -86,7 +86,10 @@ resource "aws_eks_node_group" "node_group" {
     create_before_destroy = true
   }
 
-  tags = {
-    terraform = "true"
-  }
+  tags = merge(
+    {
+      terraform = "true"
+    },
+    var.additional_asg_tags
+  )
 }

@@ -74,3 +74,8 @@ variable "use_gpu" {
   type    = bool
   default = false
 }
+
+variable "additional_asg_tags" {
+  type    = map(string)
+  default = {}
+}
