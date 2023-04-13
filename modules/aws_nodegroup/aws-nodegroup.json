@@ -3,6 +3,11 @@
   "description": "Deploys a kubernetes app",
   "type": "object",
   "properties": {
+    "autoscaling_tags": {
+      "type": "object",
+      "description": "tags for the underlying autoscaling group",
+      "default": {}
+    },
     "labels": {
       "type": "object",
       "description": "labels for the kubernetes nodes",
