@@ -3,9 +3,9 @@
   "description": "Deploys a kubernetes app",
   "type": "object",
   "properties": {
-    "additional_asg_tags": {
+    "autoscaling_tags": {
       "type": "object",
-      "description": "additional tags for the autoscaling group",
+      "description": "tags for the underlying autoscaling group",
       "default": {}
     },
     "labels": {

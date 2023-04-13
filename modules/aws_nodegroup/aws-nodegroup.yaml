@@ -18,10 +18,10 @@ inputs:
     validator: map(str(), str(), required=False)
     description: labels for the kubernetes nodes
     default: {}
-  - name: additional_asg_tags
+  - name: autoscaling_tags
     user_facing: true
     validator: map(str(), str(), required=False)
-    description: additional tags for the autoscaling group
+    description: tags for the underlying autoscaling group
     default: {}
   - name: max_nodes
     user_facing: true

@@ -75,7 +75,7 @@ variable "use_gpu" {
   default = false
 }
 
-variable "additional_asg_tags" {
+variable "autoscaling_tags" {
   type    = map(string)
   default = {}
 }

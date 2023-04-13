@@ -86,10 +86,24 @@ resource "aws_eks_node_group" "node_group" {
     create_before_destroy = true
   }
 
-  tags = merge(
-    {
-      terraform = "true"
-    },
-    var.additional_asg_tags
-  )
+  tags = {
+    terraform = "true"
+  }
+}
+
+# Tags are not propagated from the EKS managed node group to the underlying autoscaling group. Create ASG tag
+# resources explicitly. See https://github.com/terraform-aws-modules/terraform-aws-eks/issues/1886.
+resource "aws_autoscaling_group_tag" "node_group" {
+  for_each = { for k, v in var.autoscaling_tags : k => v }
+
+  autoscaling_group_name = aws_eks_node_group.node_group.resources[0].autoscaling_groups[0].name
+  tag {
+    key                 = each.key
+    value               = each.value
+    propagate_at_launch = false
+  }
+
+  depends_on = [
+    aws_eks_node_group.node_group,
+  ]
 }
