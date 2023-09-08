@@ -100,7 +100,7 @@ VERSION="${VERSION:-}"
 if [[ -z ${VERSION} ]]; then
 	# Determine latest VERSION
 	echo "Determining latest version"
-	VERSION="$(curl -s https://api.github.com/repos/unionai/opta/releases/latest | grep 'tag_name' | grep -oP '[0-9.]+')"
+	VERSION="$(curl -s https://api.github.com/repos/yindia/opta/releases/latest | grep 'tag_name' | grep -oP '[0-9.]+')"
 else
 	VERSION=$(trim_version "${VERSION}")
 fi
@@ -110,12 +110,12 @@ echo "Going to install opta v${VERSION}"
 if [[ ${OS} == "Linux" ]]; then
 	SPECIFIC_OS_ID=$(grep "ID=" /etc/os-release | awk -F"=" '{print $2;exit}' | tr -d '"')
 	if [[ ${SPECIFIC_OS_ID} == "amzn" ]] || [[ ${SPECIFIC_OS_ID} == "centos" ]]; then
-		PACKAGE=https://github.com/unionai/opta/releases/download/v$VERSION/opta_centos.zip
+		PACKAGE=https://github.com/yindia/opta/releases/download/v$VERSION/opta_centos.zip
 	else
-		PACKAGE=https://github.com/unionai/opta/releases/download/v$VERSION/opta_linux.zip
+		PACKAGE=https://github.com/yindia/opta/releases/download/v$VERSION/opta_linux.zip
 	fi
 elif [[ ${OS} == "Darwin" ]]; then
-	PACKAGE=https://github.com/unionai/opta/releases/download/v$VERSION/opta_mac.zip
+	PACKAGE=https://github.com/yindia/opta/releases/download/v$VERSION/opta_mac.zip
 else
 	abort "Opta is only supported on macOS and Linux."
 fi
@@ -124,7 +124,7 @@ echo "Downloading installation package..."
 curl -s -L "${PACKAGE}" -o /tmp/opta.zip --fail
 if [[ $? != 0 ]]; then
 	echo "Version ${VERSION} not found."
-	echo "Please check the available versions at https://github.com/unionai/opta/releases."
+	echo "Please check the available versions at https://github.com/yindia/opta/releases."
 	exit 1
 fi
 echo "Downloaded"
